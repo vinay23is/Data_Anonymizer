@@ -1,0 +1,9 @@
+id,name,salary,start_date,dept
+1,Rick,100,01-01-2012,IT
+2,Dan,200,23-09-2013,Operations
+3,Michelle,100,15-11-2014,IT
+4,Ryan,200,11-05-2014,HR
+5,Gary,200,27-03-2015,Finance
+6,Nina,200,21-05-2013,IT
+7,Simon,100,30-07-2013,Operations
+8,Guru,100,17-06-2014,Finance
