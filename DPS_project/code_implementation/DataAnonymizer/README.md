@@ -4,7 +4,7 @@ A web application for anonymizing sensitive datasets using the **ARX Data Anonym
 
 ## Live Demo
 
-> **URL:** *(update after deployment)*  
+> **URL:** https://data-anonymizer.onrender.com/DataAnonymizer/page-login.html  
 > **Login:** `admin@iiitb` / `admin`
 
 ## Features
