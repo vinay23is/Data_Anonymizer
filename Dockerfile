@@ -1,4 +1,4 @@
-FROM tomcat:9.0-jdk11-temurin
+FROM tomcat:9.0-jdk8-temurin
 
 COPY DPS_project/code_implementation/DataAnonymizer/target/DataAnonymizer.war /usr/local/tomcat/webapps/DataAnonymizer.war
 
