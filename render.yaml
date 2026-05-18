@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: data-anonymizer
+    env: docker
+    plan: free
+    branch: main
+    healthCheckPath: /DataAnonymizer/page-login.html

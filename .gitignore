@@ -1,0 +1,4 @@
+.DS_Store
+*.class
+*.log
+/DPS_project/code_implementation/DataAnonymizer/bin/target/

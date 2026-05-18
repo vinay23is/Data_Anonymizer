@@ -1,73 +1,73 @@
 # Data Anonymizer
 
-# Open Source Data Anonymization Software
+A web application for anonymizing sensitive datasets using the **ARX Data Anonymization Library**. Supports k-anonymity and l-diversity privacy models with a configurable, file-based pipeline.
 
-## Introduction:
+## Live Demo
 
-In recent years, escalation of technology led to an increase in the capability to record and
-store personal data about consumers and individuals. With this information almost anyone
-can track or know more about a person’s life. This raised concerns on personal data misuses
-in many different ways. To mitigate these issues, some de-identification methodologies have
-recently been proposed that, in some well controlled circumstances, allow for the re-use of
-personal data in privacy- preserving ways. So one such particular method is Data
-Anonymization.
+> **URL:** *(update after deployment)*  
+> **Login:** `admin@iiitb` / `admin`
 
-Data anonymization ensures that even if de-identified data is stolen, it is very hard to re-
-identify it.
+## Features
 
-## Objectives:
+- Upload CSV datasets for de-identification
+- Configure anonymization rules through an XML-based configuration system
+- Supports **k-anonymity** privacy model with configurable suppression rates
+- Attribute classification: Identifying, Quasi-Identifying, Sensitive, Insensitive
+- Generalization hierarchy support per attribute
+- Download anonymized output as CSV
+- REST API backend (JAX-RS / Jersey) on Apache Tomcat
 
-The main objective of this web application is to make it easy for a user to anonymize the
-data. It means the user can upload the dataset and can choose configuration or create a new
-configuration with in the web interface for de-identification, after that the de-identified or
-anonymised data can be downloaded. The important task of this project was to create an
-interface for the user such that a new configuration can be developed on the dataset. The tool
-internally uses **_ARX Library_** for de-identification.
+## Tech Stack
 
-## Development Setup
+| Layer | Technology |
+|-------|-----------|
+| Backend | Java (JAX-RS / Jersey), Apache Tomcat |
+| Anonymization | ARX Library (k-anonymity, l-diversity) |
+| Frontend | HTML5, Bootstrap, JavaScript |
+| Build | Maven |
+| Deployment | Docker |
 
-The Development of this tool can be done using Eclipse as an IDE. Clone this repository and
-import it to Eclipse and make sure all the dependencies are present.
-More information about it can be found in the complete documentation of project. Support
-for further IDEs such as IntelliJ IDEA and Maven is experimental.
+## Running Locally
 
+**With Docker:**
 
-### How to install:
+```bash
+docker build -t data-anonymizer .
+docker run -p 8080:8080 data-anonymizer
+```
 
-There are different ways to run data anonymizer-
+Then open: [http://localhost:8080/DataAnonymizer/page-login.html](http://localhost:8080/DataAnonymizer/page-login.html)
 
-Using War file -
+**With Tomcat directly:**
+
+1. Download Apache Tomcat 9
+2. Copy `DPS_project/code_implementation/DataAnonymizer/target/DataAnonymizer.war` to Tomcat's `webapps/` directory
+3. Start Tomcat: `./bin/startup.sh`
+4. Open: [http://localhost:8080/DataAnonymizer/page-login.html](http://localhost:8080/DataAnonymizer/page-login.html)
+
+## Usage
+
+1. **Login** with `admin@iiitb` / `admin`
+2. **Upload** a CSV data source
+3. **Create or upload** an XML configuration defining attribute types and privacy model parameters
+4. **Anonymize** — the app applies k-anonymity via the ARX engine
+5. **Download** the anonymized output CSV
+
+## Sample Dataset
+
+The repo includes the UCI Adult dataset (`adult.csv`) with pre-built generalization hierarchies for attributes like age, education, occupation, and race — ready to use out of the box.
+
+## Architecture
 
 ```
-Download the DataAnonymizer.war file from the target folder of this repository and
-copy it to the webapps directory of tomcat and start the tomcat server.
-```
-```
-To start the server, go to tomcat directory in the terminal and use the following
-command - ./bin/startup.sh
-For Ubuntu : /var/lib/tomcat7/webapps
-For tomcat install, you can refer Installing Apache Tomcat on Linux
-For Deployment of web application on tomcat refer here
-```
-Using docker image -
-
-```
-Download the Docker image for Data Anonymizer from here or run the below
-command to download the file.
-```
-```
-Downloading docker image: $ docker pull pranith563/data_anonymizer:webimg
-To run docker container: $ docker run -i -t pranith563/data_anonymizer:webimg
-```
-Using Eclipse IDE -
-Open eclipse and choose import and copy the git url to import the project and
-run it using apache.
-
-You can access the data anonymizer at -
-[http://localhost:8080/DataAnonymizer/page-login.html](http://localhost:8080/DataAnonymizer/page-login.html)
-
-Default details to access data anonymizer are:
-```
-username: admin@iiitb
-Password: admin
+Client (HTML/JS)
+     │
+     ▼
+Tomcat Servlet Container
+     │
+     ├── /anonymizer/signin       — Authentication
+     ├── /anonymizer/uploadSource — CSV upload
+     ├── /anonymizer/uploadConfig — Config XML upload
+     ├── /anonymizer/anonymize    — Run ARX anonymization
+     └── /anonymizer/download     — Download result CSV
 ```
